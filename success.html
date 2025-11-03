@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Agentic File Organizer - Report</title>
+    <style>
+        body { font-family: Arial; text-align: center; background-color: #f9fafb; padding: 50px; }
+        table { width: 80%; margin: 20px auto; border-collapse: collapse; background: white; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        th, td { padding: 12px; border: 1px solid #ddd; text-align: left; }
+        th { background-color: #007BFF; color: white; }
+        tr:nth-child(even) { background-color: #f2f2f2; }
+        h2 { color: #2d862d; }
+        a { text-decoration: none; color: #007BFF; }
+        a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <h2>✅ Files Organized Successfully</h2>
+    <p>Your agent analyzed each file and made decisions as shown below:</p>
+
+    <table>
+        <tr>
+            <th>File Name</th>
+            <th>Category</th>
+            <th>Agent's Reasoning</th>
+        </tr>
+        {% for item in report %}
+        <tr>
+            <td>{{ item.filename }}</td>
+            <td>{{ item.category }}</td>
+            <td>{{ item.reason }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <a href="/">⬅ Back to Home</a>
+    <br><br>
+    <a href="/organized">📁 View Organized Files</a>
+</body>
+</html>

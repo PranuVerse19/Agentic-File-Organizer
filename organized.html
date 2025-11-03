@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Organized Files</title>
+    <style>
+        body { font-family: Arial; background-color: #f9fafc; padding: 30px; text-align: center; }
+        h2 { color: #2d86d3; margin-bottom: 20px; }
+        .category { margin: 30px 0; }
+        .file-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
+        .file-box { background: white; padding: 15px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); width: 200px; }
+        img { max-width: 100%; border-radius: 8px; }
+        a { color: #007BFF; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        button { background-color: #007BFF; color: white; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; margin-top: 20px; }
+        button:hover { background-color: #0056b3; }
+    </style>
+</head>
+<body>
+    <h2>📁 Organized Files Dashboard</h2>
+
+    {% for category, files in data.items() %}
+        <div class="category">
+            <h3>{{ category }}</h3>
+            {% if files %}
+            <div class="file-grid">
+                {% for file in files %}
+                    <div class="file-box">
+                        {% if file.lower().endswith(('.png', '.jpg', '.jpeg', '.gif')) %}
+                            <img src="{{ url_for('serve_file', category=category, filename=file) }}" alt="{{ file }}">
+                        {% else %}
+                            <p>📄 {{ file }}</p>
+                        {% endif %}
+                        <a href="{{ url_for('serve_file', category=category, filename=file) }}" target="_blank">Open</a>
+                    </div>
+                {% endfor %}
+            </div>
+            {% else %}
+                <p><i>No files found in this category.</i></p>
+            {% endif %}
+        </div>
+    {% endfor %}
+
+    <a href="/"><button>⬅ Back to Upload</button></a>
+</body>
+</html>
